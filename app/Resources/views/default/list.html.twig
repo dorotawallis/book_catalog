@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+<h1>Lista książek</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tytuł</th>
+            <th>Autor</th>
+            <th>ISBN</th>
+            <th>Cena</th>
+            <th>Gatunek</th>
+            <th>Rok wydania</th>
+            <th>Stworzona</th>
+            <th>Edytuj</th>
+        </tr> 
+    </thead>
+    <tbody> 
+        {% for book in books %}   
+        <tr>
+            <td>{{book.id}}</td>
+            <td><a href="/book/{{book.id}}">{{book.title}}</a></td>
+            <td>{{ book.author }}</td>
+            <td>{{book.isbn}}</td>
+            <td>{{book.price}}</td>
+            <td>{{book.genre}}</td>
+            <td>{{book.yearPublished }}</td>
+            <td>{{book.createdAt |date('Y-m-d H:i:s')}}</td>
+            <td><a href="/edit/{{book.id}}">Edytuj</a></td>
+        </tr>  
+        {% endfor %} 
+    </body>    
+</table>
+<a href="/add">Dodaj nową</a>
+{% endblock %}
